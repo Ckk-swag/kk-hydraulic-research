@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="未来水利交叉信息情报站">
+  <rect width="512" height="512" rx="112" fill="#123140"/>
+  <path d="M155 96c19 42 58 74 96 110 31 29 42 58 45 93 3 36-14 72-42 117" fill="none" stroke="#78D7CF" stroke-width="38" stroke-linecap="round"/>
+  <path d="M351 105c-22 46-58 78-100 101" fill="none" stroke="#78D7CF" stroke-width="38" stroke-linecap="round"/>
+  <path d="M120 335c37-20 66-20 103 0s66 20 103 0 66-20 103 0" fill="none" stroke="#EAF8F5" stroke-width="27" stroke-linecap="round"/>
+  <path d="M124 387c36-18 65-18 101 0s65 18 101 0 65-18 101 0" fill="none" stroke="#49AAB8" stroke-width="23" stroke-linecap="round"/>
+</svg>

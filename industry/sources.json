@@ -1,0 +1,416 @@
+{
+  "$comment": "信源按河口潮汐、河涌模拟与泥沙研究筛选；2026-09-29 已从广州服务器核对入口可达。首次启动时导入，之后在后台管理。所有来源默认仅展示摘要与原文链接。",
+  "sources": [
+    {
+      "id": "bluerobotics-blueos-releases",
+      "name": "Blue Robotics BlueOS · 水域机器人平台",
+      "kind": "json_list",
+      "config": {
+        "url": "https://api.github.com/repos/bluerobotics/BlueOS/releases?per_page=30",
+        "headers": { "User-Agent": "KaikaiWaterResearchBot" },
+        "titlePaths": ["name", "tag_name"],
+        "summaryPaths": ["body"],
+        "publishedAtPath": "published_at",
+        "externalIdPath": "id",
+        "urlTemplate": "{raw:html_url}",
+        "requireBoolean": { "path": "prerelease", "equals": false },
+        "allowUrlPrefixes": ["https://github.com/bluerobotics/BlueOS/releases/tag/"],
+        "sortByPublishedAt": true,
+        "_aihot": { "initialBackfillLimit": 3 }
+      },
+      "tier": "T1_5",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 720,
+      "tags": ["软件", "水利机器人"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "bluerobotics-cockpit-releases",
+      "name": "Blue Robotics Cockpit · 水域机器人操控",
+      "kind": "json_list",
+      "config": {
+        "url": "https://api.github.com/repos/bluerobotics/cockpit/releases?per_page=30",
+        "headers": { "User-Agent": "KaikaiWaterResearchBot" },
+        "titlePaths": ["name", "tag_name"],
+        "summaryPaths": ["body"],
+        "publishedAtPath": "published_at",
+        "externalIdPath": "id",
+        "urlTemplate": "{raw:html_url}",
+        "requireBoolean": { "path": "prerelease", "equals": false },
+        "allowUrlPrefixes": ["https://github.com/bluerobotics/cockpit/releases/tag/"],
+        "sortByPublishedAt": true,
+        "_aihot": { "initialBackfillLimit": 3 }
+      },
+      "tier": "T1_5",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 720,
+      "tags": ["软件", "水利机器人"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "nature-water-feed",
+      "name": "Nature Water · 最新论文",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.nature.com/natwater.rss",
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "nature-water",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": ["论文", "水文"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "mwr-water-news",
+      "name": "水利部 · 水利要闻",
+      "kind": "web_list",
+      "config": {
+        "url": "http://www.mwr.gov.cn/xw/slyw/",
+        "headers": { "Connection": "close" },
+        "ipv4Only": true,
+        "itemSelector": "ul.slnewsconlist li",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtSelector": "span",
+        "allowUrlPrefixes": ["http://www.mwr.gov.cn/xw/slyw/"],
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "mwr",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": ["官方", "水利部"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "mwr-policy-documents",
+      "name": "水利部 · 规范性文件",
+      "kind": "web_list",
+      "config": {
+        "url": "http://www.mwr.gov.cn/zw/zcfg/gfxwj/",
+        "headers": { "Connection": "close" },
+        "ipv4Only": true,
+        "itemSelector": "ul.slnewsconlist li",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtSelector": "span",
+        "allowUrlPrefixes": ["http://www.mwr.gov.cn/zwgk/gknr/"],
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "mwr",
+      "participation_mode": "editorial",
+      "interval_minutes": 720,
+      "tags": ["官方", "政策标准"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "mwr-science-updates",
+      "name": "水利部 · 水利科技工作动态",
+      "kind": "web_list",
+      "config": {
+        "url": "http://gjkj.mwr.gov.cn/slkj1/gzdt_1/",
+        "headers": { "Connection": "close" },
+        "ipv4Only": true,
+        "requirePublishedAt": true,
+        "itemSelector": "div.nr_5 li",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "allowUrlPrefixes": ["http://gjkj.mwr.gov.cn/slkj1/gzdt_1/"],
+        "detail": {
+          "maxFetches": 12,
+          "publishedAtRegex": "<meta name=\"publishdate\" content=\"([^\"]+)\"",
+          "publishedAtAuthoritative": true
+        },
+        "_aihot": { "initialBackfillLimit": 8 }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "mwr",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": ["官方", "科研"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hess-recent-papers",
+      "name": "Hydrology and Earth System Sciences · 最新论文",
+      "kind": "web_list",
+      "config": {
+        "url": "https://hess.copernicus.org/recent_papers.html",
+        "itemSelector": ".paperlist-object.paperList-final",
+        "linkSelector": "a.article-title",
+        "titleSelector": "a.article-title",
+        "publishedAtSelector": ".published-date",
+        "allowUrlPrefixes": [
+          "https://hess.copernicus.org/articles/"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "hess",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "论文",
+        "水文"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "agu-wrr-feed",
+      "name": "Water Resources Research · 期刊更新",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://agupubs.onlinelibrary.wiley.com/action/showFeed?jc=19447973&type=etoc&feed=rss",
+        "_aihot": {
+          "initialBackfillLimit": 8
+        }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "论文",
+        "水文"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "nhri-research",
+      "name": "南京水利科学研究院 · 科研进展",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.nhri.cn/",
+        "itemSelector": ".xxList li:has(a[href^=\"/kyjz/art/\"])",
+        "linkSelector": "a[href^=\"/kyjz/art/\"]",
+        "titleSelector": "a[href^=\"/kyjz/art/\"]",
+        "allowUrlPrefixes": [
+          "https://www.nhri.cn/kyjz/art/"
+        ],
+        "detail": {
+          "maxFetches": 8,
+          "publishedAtSelector": ".bt-date"
+        },
+        "_aihot": {
+          "initialBackfillLimit": 6
+        }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "nhri",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "官方",
+        "科研"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "egu-hydrology-blog",
+      "name": "EGU Hydrological Sciences · 博客",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://blogs.egu.eu/divisions/hs/feed/",
+        "_aihot": {
+          "initialBackfillLimit": 6
+        }
+      },
+      "tier": "T1_5",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "研究",
+        "解读"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "deltares-delft3d-releases",
+      "name": "Deltares Delft3D · 版本发布",
+      "kind": "json_list",
+      "config": {
+        "url": "https://api.github.com/repos/Deltares/Delft3D/releases?per_page=10",
+        "headers": {
+          "User-Agent": "KaikaiWaterResearchBot"
+        },
+        "titlePaths": [
+          "name",
+          "tag_name"
+        ],
+        "summaryPaths": [
+          "body"
+        ],
+        "publishedAtPath": "published_at",
+        "externalIdPath": "id",
+        "urlTemplate": "{raw:html_url}",
+        "_aihot": {
+          "initialBackfillLimit": 4
+        }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "deltares",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "软件",
+        "水动力"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "schism-releases",
+      "name": "SCHISM · 版本发布",
+      "kind": "json_list",
+      "config": {
+        "url": "https://api.github.com/repos/schism-dev/schism/releases?per_page=10",
+        "headers": {
+          "User-Agent": "KaikaiWaterResearchBot"
+        },
+        "titlePaths": [
+          "name",
+          "tag_name"
+        ],
+        "summaryPaths": [
+          "body"
+        ],
+        "publishedAtPath": "published_at",
+        "externalIdPath": "id",
+        "urlTemplate": "{raw:html_url}",
+        "_aihot": {
+          "initialBackfillLimit": 2
+        }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "软件",
+        "河口"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "ocean-science-papers",
+      "name": "Ocean Science · 河口与潮汐研究",
+      "kind": "web_list",
+      "config": {
+        "url": "https://os.copernicus.org/recent_papers.html",
+        "itemSelector": ".paperlist-object.paperList-final",
+        "linkSelector": "a.article-title",
+        "titleSelector": "a.article-title",
+        "publishedAtSelector": ".published-date",
+        "allowUrlPrefixes": [
+          "https://os.copernicus.org/articles/"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 6
+        }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "论文",
+        "河口"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "enabled": false
+    },
+    {
+      "id": "earth-surface-dynamics-papers",
+      "name": "Earth Surface Dynamics · 泥沙与地貌",
+      "kind": "web_list",
+      "config": {
+        "url": "https://esurf.copernicus.org/recent_papers.html",
+        "itemSelector": ".paperlist-object.paperList-final",
+        "linkSelector": "a.article-title",
+        "titleSelector": "a.article-title",
+        "publishedAtSelector": ".published-date",
+        "allowUrlPrefixes": [
+          "https://esurf.copernicus.org/articles/"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 6
+        }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "论文",
+        "泥沙"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "enabled": false
+    },
+    {
+      "id": "geoscientific-model-development-papers",
+      "name": "Geoscientific Model Development · 数值模型",
+      "kind": "web_list",
+      "config": {
+        "url": "https://gmd.copernicus.org/recent_papers.html",
+        "itemSelector": ".paperlist-object.paperList-final",
+        "linkSelector": "a.article-title",
+        "titleSelector": "a.article-title",
+        "publishedAtSelector": ".published-date",
+        "allowUrlPrefixes": [
+          "https://gmd.copernicus.org/articles/"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 6
+        }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "论文",
+        "模型"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "enabled": false
+    }
+  ]
+}
